@@ -2,7 +2,7 @@ class ShoppingListController < ApplicationController
     get '/shopping_lists' do
         if logged_in?
             @user = current_user
-            erb :"shopping_list/new"
+            erb :"shopping_list/index"
         else
             redirect to '/login'
         end

@@ -21,6 +21,8 @@ class ItemController < ApplicationController
             params[:item][:name].capitalize!
             if !!Item.find_by(params[:item])
                 @item = Item.find_by(params[:item])
+            elsif params[:item][:name] == "" || params[:item][:price] == ""
+                redirect to '/items/new'
             else
                 @item = Item.create(params[:item])
                 @item.user = current_user

@@ -1,22 +1,27 @@
 <h1> Create a New Shopping List, <%= @user.name %> </h1>
 
 <form action="/shopping_lists" method="post">
-    <label>New List Name</label<
-    <input type="text" id="list_name" name="shopping_list[name]" value="Food List">
+    <label>New List Name</label>
+    <input type="text" id="list_name" name="shopping_list[name]" placeholder="Food List">
     <br>
-    <h3>Items to add to List</h3>
-    <% Item.all.each do |item| %>
-        <label><%= item.name %> $<%= item.price %></label>
-        <input type="checkbox" name="shopping_list[item_ids][]" id="item_<%= item.id %>" value="<%= item.id %>">
-        <br>
+
+    <% if Item.all == [] %>
+        <h3> No items in database! </h3>
+    <% else %>
+        <h3>Items to add to List</h3>
+        <% Item.all.each do |item| %>
+            <label><%= item.name %> $<%= item.price %></label>
+            <input type="checkbox" name="shopping_list[item_ids][]" id="item_<%= item.id %>" value="<%= item.id %>">
+            <br>
+        <% end %>
     <% end %>
 
-    <h3>Create New Item</h3>
+    <h3>Create Item to Add to this List</h3>
     <label>Item Name</label>
-    <input type="text" id="item_name" name="item[name]">
+    <input type="text" id="item_name" name="item[name]" placeholder="Ice Cream">
     <label>Item Price</label>
-    <input type="number" id="item_price" name="item[price]">
-    
+    <input type="number" id="item_price" name="item[price]" placeholder="6">
+    <br><br>
     <input type="submit" value="Create List">
     <input type="reset">
 </form>
