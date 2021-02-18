@@ -1,0 +1,26 @@
+<h1> Edit your list, <%= @list.name %> </h1>
+
+<form action="/shopping_list/<%= @list.id %>" method="post">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+
+    <label>List Name</label>
+    <input type="text" id="list_name" name="shopping_list[name]" value="<%= @list.name %>">
+    <br>
+    <h3>Items to add to List</h3>
+    <% Item.all.each do |item| %>
+        <label><%= item.name %></label>
+        <input type="checkbox" id="item_<%= item.id %>" name="shoppimg_list[item_ids][]" value="<%= item.id %>"<%= 'checked' if @list.items.include?(item) %>>
+    <% end %>
+
+    <h3>Create New Item</h3>
+    <label>Item Name</label>
+    <input type="text" id="item_name" name="item[name]">
+    <br>
+    <label>Item Price</label>
+    <input type="number" id="item_price" name="item[price]"
+    
+    <input type="submit" value="Edit List">
+</form>
+
+<h3> Need to add another Item to the database, before making your list? </h3>
+<a href="items/new"><button>Click Here!</button></a>
