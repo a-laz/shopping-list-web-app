@@ -1,0 +1,19 @@
+<h1><%= @item.name %> $<%= @item.price %></h1>
+
+<% if @item.shopping_lists == [] %>
+    <h3> This item is not in any of your lists! </h3>
+<% else %>
+    <h3>Your lists, this item is a part of</h3>
+    <ul><% @item.shopping_lists.each do |list| %>
+        <% if list.user == current_user %>
+            <li><a href="/shopping_lists<%= list.id %>"><%= list.name %></a></li>
+        <% end %>
+    <% end %></ul>
+<% end %>
+<br><br>
+
+<a href="/shopping_lists"><button>Home</button></a><br><br>
+<a href="/shopping_lists/new"><button>New Shopping List</button></a><br><br>
+<a href="/items"><button>All Items</button></a><br><br>
+<a href="/items/<%= @item.id %>/edit"><button>Edit this Item</button></a><br><br>
+<a href="/items/new"><button>New Item</button></a>
