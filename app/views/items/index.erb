@@ -1,0 +1,15 @@
+<% if Item.all == [] %>
+    <h1> No Items! </h1>
+    <h2> Create One Below </h2>
+    <a href="/items/new"><button>New Item</button></a>
+<% end %> 
+
+<h1> All of the Items </h1>
+
+<% Item.all.each do |item| %>
+    <h3><%= item.name %> $<%= item.price %></h3><br>
+<% end %>
+
+<a href="/shopping_lists"><button>Home</button></a><br><br>
+<a href="/items/new"><button>New Item</button></a><br><br>
+<a href="/shopping_lists/new"><button>New Shopping List</button></a>
