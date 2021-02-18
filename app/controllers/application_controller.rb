@@ -3,6 +3,7 @@ class ApplicationController < Sinatra::Base
         set :views, proc { File.join(root, "../views/") }
         enable :sessions
         set :session_secret, "shopping_web_app"
+        
     end
 
     get '/' do

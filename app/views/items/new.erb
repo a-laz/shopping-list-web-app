@@ -1,3 +1,7 @@
+<% if flash.has?(:data_error) %>
+    <%= flash[:data_error] %>
+<% end %>
+
 <h1>Create a New Item</h1>
 
 <form action="/items" method="post">

@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class ItemController < ApplicationController
+    use Rack::Flash
 
     get '/items' do
         if logged_in?
@@ -20,8 +23,10 @@ class ItemController < ApplicationController
         if logged_in?
             params[:item][:name].capitalize!
             if !!Item.find_by(params[:item])
-                @item = Item.find_by(params[:item])
+                flash[:data_error] = "That item already exists!"
+                redirect to '/items/new'
             elsif params[:item][:name] == "" || params[:item][:price] == ""
+                flash[:data_error] = "You left one of the required fields blank! Please Try again!"
                 redirect to '/items/new'
             else
                 @item = Item.create(params[:item])
