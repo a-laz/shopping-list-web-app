@@ -1,4 +1,8 @@
+require 'rack-flash'
+
 class UserController < ApplicationController
+    use Rack::Flash
+
     get '/signup' do
         if !logged_in?
             erb:"users/signup"
@@ -9,8 +13,10 @@ class UserController < ApplicationController
 
     post '/signup' do 
         if params[:name] == "" || params[:email] == "" || params[:password] == ""
+            flash[:missing_data] = "Cannot leave any fields blank!"
             redirect to '/signup'
         elsif !!User.find_by(:email => params[:email])
+            flash[:existing_user] = "A user with that email already exists"
             redirect to '/signup'
         else
             @user = User.create(:name => params[:name], :email => params[:email], :password => params[:password])
@@ -32,6 +38,7 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             redirect to '/shopping_lists'
         else
+            flash[:login] = "Either your Email or Password is wrong"
             redirect to '/login'
         end
     end

@@ -21,12 +21,14 @@ class ItemController < ApplicationController
 
     post '/items' do
         if logged_in?
-            params[:item][:name].capitalize!
-            if !!Item.find_by(params[:item])
-                flash[:data_error] = "That item already exists!"
-                redirect to '/items/new'
-            elsif params[:item][:name] == "" || params[:item][:price] == ""
+            if params[:item][:name] != ""
+                params[:item][:name].gsub!(/(\b[a-z])+/) {|letter| letter.capitalize}
+            end
+            if params[:item][:name] == "" || params[:item][:price] == ""
                 flash[:data_error] = "You left one of the required fields blank! Please Try again!"
+                redirect to '/items/new'
+            elsif !!Item.find_by(params[:item])
+                flash[:data_error] = "That item already exists!"
                 redirect to '/items/new'
             else
                 @item = Item.create(params[:item])
