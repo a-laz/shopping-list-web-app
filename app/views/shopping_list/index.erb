@@ -5,7 +5,7 @@
     <h1> Hi <%= @user.name %>, here are your shopping lists </h1>
     <br>
     <% @user.shopping_lists.each do |list| %>
-        <h2><a href="/shopping_list/<%= list.id %>"><%= list.name %></a></h2>
+        <h2><a href="/shopping_lists/<%= list.id %>"><%= list.name %></a></h2>
         <br>
         <ul><% @list_price = 0 %>
         <% list.items.each do |item| %>

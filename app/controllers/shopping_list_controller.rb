@@ -77,7 +77,7 @@ class ShoppingListController < ApplicationController
                 unless params[:item][:name].empty?
                     @list.items << Item.create(params[:item])
                 end
-                redirect to ("/shopping_lists/#{@list.id}")
+                redirect to("/shopping_lists/#{@list.id}")
             else
                 redirect to '/shopping_lists'
             end
